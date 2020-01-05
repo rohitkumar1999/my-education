@@ -21,5 +21,7 @@ LinearLayout  personal,start_chapter,view_notes,study_result,translate,test_know
         study_result=findViewById(R.id.study_result);
         translate=findViewById(R.id.translate_notes);
         test_knowledge=findViewById(R.id.test);
+
+
     }
 }
