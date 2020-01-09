@@ -1,11 +1,12 @@
 package com.codingblocks.education.EntityClasses;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Chapter Info")
+@Entity(tableName = "Chapter_Info")
 public class Chapter {
-    @PrimaryKey
+    @PrimaryKey @NonNull
     public String chapter_name ;
     public String chapter_subject ;
 

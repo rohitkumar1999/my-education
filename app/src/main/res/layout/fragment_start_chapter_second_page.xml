@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.start_chapter_second_page">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frag_start_chapter_second_txtview_chapter_name"
+            android:text="Chapter name"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            />
+        <ToggleButton
+            android:id="@+id/frag_start_chapter_second_tglbtn_lisening"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Listen"
+            android:textOn="stop Listening"
+            android:textOff="Start Listening"
+            android:layout_height="wrap_content"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:layout_height="500dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:id="@+id/frag_start_chapter_second_txtview_notes"
+                />
+
+
+
+        </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+
+            android:layout_height="match_parent"
+            >
+            <Button
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:text="Done"
+                android:id="@+id/frag_start_chapter_second_button_done"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="15dp"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/frag_start_chapter_second_float_button_qrcode"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

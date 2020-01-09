@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codingblocks.education.EntityClasses.Chapter;
+import com.codingblocks.education.MainActivity;
 import com.codingblocks.education.R;
 import com.muddzdev.styleabletoast.StyleableToast;
 
@@ -20,7 +23,7 @@ import com.muddzdev.styleabletoast.StyleableToast;
  */
 public class start_chapter extends Fragment {
 
-    TextView name_of_chapter,name_of_subject ;
+    EditText name_of_chapter,name_of_subject ;
     Button  lets_start ;
 
 
@@ -45,6 +48,20 @@ public class start_chapter extends Fragment {
                     StyleableToast.makeText(getContext(), "Please Provide complete information", Toast.LENGTH_SHORT, R.style.mytoast).show();
                 else
                 {
+                    Chapter chapter = new Chapter() ;
+                    chapter.setChapter_name(chapterName);
+                    chapter.setChapter_subject(subjectName);
+                    MainActivity.myappdatabaseclass.myDaoforchapter().addChapter(chapter);
+                    StyleableToast.makeText(getContext(),"Chapter Created Successfully",Toast.LENGTH_SHORT).show();
+                    Fragment fragment = new start_chapter_second_page() ;
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.new_container,fragment)
+                            .addToBackStack(null).commit() ;
+
+                    Bundle args = new Bundle();
+                    args.putString("chapterName", chapterName);
+                    args.putString("chapeterSubject",subjectName);
+                    fragment.setArguments(args);
+
 
                 }
             }

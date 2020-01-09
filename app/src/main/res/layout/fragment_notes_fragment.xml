@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.translate_notes">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/frag_translate_notes_back_arrow"
+                android:background="@drawable/ic_arrow_back_black_24dp"/>
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:id="@+id/frag_translate_notes_file_name"
+                android:layout_toEndOf="@+id/frag_translate_notes_back_arrow"
+                android:textSize="20sp"
+                android:text="File name"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+
+                android:layout_alignParentRight="true"
+                android:id="@+id/frag_translate_notes_mic"
+                android:background="@drawable/ic_mic_black_24dp"/>
+
+        </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="normal"
+                android:id="@+id/frag_translate_notes_notes"
+                android:textSize="16sp"/>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</FrameLayout>

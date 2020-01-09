@@ -10,12 +10,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name of the chapter"
             android:id="@+id/frag_start_chapter_txtview_name_of_chapter"/>
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Subject of the chapter"
