@@ -60,8 +60,13 @@ public class expandableadapter extends BaseExpandableListAdapter {
     }
 
     @Override
+    public boolean areAllItemsEnabled() {
+        return true;
+    }
+
+    @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
@@ -96,7 +101,7 @@ public class expandableadapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
-        return false;
+        return true;
     }
 
     public List<String> getHeader_titles() {
