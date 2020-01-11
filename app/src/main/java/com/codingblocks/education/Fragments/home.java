@@ -44,7 +44,7 @@ public class home extends Fragment implements View.OnClickListener {
 
 
         View view= inflater.inflate(R.layout.fragment_home, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
 
 
         personal=view.findViewById(R.id.personal_data);

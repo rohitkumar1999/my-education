@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".signup">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/newheader"
+        android:layout_height="match_parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signup_profile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+
+            android:padding="2dp"
+            android:clickable="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="30dp"
+
+            app:civ_border_width="2dp"
+
+            android:background="@drawable/circle"
+            />
+
+
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/signup_fullname"
+            android:layout_margin="10dp"
+            android:hint="  enter your full name"
+            android:background="@drawable/edittext_background"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select your Designation"
+            android:layout_marginLeft="15dp"
+            android:textSize="18sp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:textColor="#000"/>
+
+        <Spinner
+
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/signup_spinner_designation"
+            android:entries="@array/designation"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select your class"
+            android:layout_marginLeft="15dp"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:textColor="#000"/>
+        <Spinner
+            android:id="@+id/signup_class_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+
+
+            android:entries="@array/student_class"
+            android:layout_margin="10dp"/>
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:hint="  enter your local language"
+            android:id="@+id/signup_language"
+
+            android:background="@drawable/edittext_background"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:hint="  enter your email id"
+            android:id="@+id/signup_mail_id"
+            android:background="@drawable/edittext_background"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:hint="  enter Password"
+            android:id="@+id/signup_pass"
+            android:background="@drawable/edittext_background"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:hint=" Re-enter Password"
+            android:id="@+id/sigup_repass"
+            android:background="@drawable/edittext_background"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:inputType="number"
+            android:id="@+id/signup_mobile_number"
+            android:hint="  enter your 10 digits mobile no"
+            android:background="@drawable/edittext_background"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN UP"
+            android:id="@+id/signup_button"
+            android:background="@drawable/background"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+
+</ScrollView>

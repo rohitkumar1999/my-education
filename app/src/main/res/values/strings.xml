@@ -14,4 +14,22 @@
         <item>Gujrati</item>
 
     </string-array>
+    <string-array name="designation">
+        <item>Student</item>
+        <item>Teacher</item>
+        <item>Parent</item>
+        <item>other</item>
+
+    </string-array>
+    <string-array name="student_class">
+        <item>1-5</item>
+        <item>6-8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>B.Tech</item>
+        <item>others</item>
+
+    </string-array>
 </resources>
