@@ -42,6 +42,7 @@ public class qr_fragment extends Fragment {
                         {
                             String str  = MainActivity.pref.getString("Scanned_Notes","null") ;
                             String res = result.getText() ;
+                            Toast.makeText(getContext(),"scan result "+res,Toast.LENGTH_LONG).show();
                             String starting ;
                             if(res.substring(0,5).equals("<NOTE>")) {
                                 starting = res.substring(6, 8);
@@ -56,6 +57,8 @@ public class qr_fragment extends Fragment {
                         else {
                             String str  = MainActivity.pref.getString("Scanned_Notes","null") ;
                             String res = result.getText() ;
+                            Toast.makeText(getContext(),"scan result "+res,Toast.LENGTH_LONG).show();
+
                             String starting ;
                             if(res.substring(0,5).equals("<NOTE>")) {
                                 starting = res.substring(6, 8);
