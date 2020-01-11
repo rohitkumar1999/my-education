@@ -19,31 +19,56 @@
 
             android:gravity="center"/>
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
         <ToggleButton
             android:id="@+id/frag_start_chapter_second_tglbtn_lisening"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:text="Listen"
             android:textOn="stop Listening"
             android:textOff="Start Listening"
             android:layout_height="wrap_content"/>
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:entries="@array/language"
+            android:id="@+id/frag_start_chapter_second_spinner"
+            android:layout_height="50dp"/>
+</LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
 
             android:layout_height="500dp">
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
 
                 android:id="@+id/frag_start_chapter_second_txtview_notes"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
 
+
+
+                android:id="@+id/frag_start_chapter_second_txtview_converted_notes"
+                />
+
+            </LinearLayout>
 
         </ScrollView>
         <LinearLayout

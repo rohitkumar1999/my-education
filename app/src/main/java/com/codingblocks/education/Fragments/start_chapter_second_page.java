@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.speech.RecognitionListener;
@@ -22,9 +23,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import android.widget.Toolbar;
 
 import com.codingblocks.education.EntityClasses.Notes;
 import com.codingblocks.education.MainActivity;
@@ -64,11 +65,11 @@ public class start_chapter_second_page extends Fragment  {
     public static String TAG = "check" ;
     public static AudioManager audioManager ;
     public static     Thread t ;
-    FirebaseTranslatorOptions options =
-            new FirebaseTranslatorOptions.Builder()
-                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
-                    .setTargetLanguage(FirebaseTranslateLanguage.HI)
-                    .build();
+    FirebaseTranslatorOptions options =  new FirebaseTranslatorOptions.Builder()
+            .setSourceLanguage(FirebaseTranslateLanguage.EN)
+            .setTargetLanguage(FirebaseTranslateLanguage.GU)
+            .build();  ;
+    public static  String language ;
 
 
     public start_chapter_second_page() {
@@ -80,6 +81,7 @@ public class start_chapter_second_page extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start_chapter_second_page, container, false);
+
         audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
         speechRecognition  = new SpeechRecognition(getContext());
         speechRecognition.useGoogleImeRecognition(false,null) ;
@@ -145,12 +147,12 @@ public class start_chapter_second_page extends Fragment  {
         final String value = getArguments().getString("chapterName");
         final String value1 = getArguments().getString("chapeterSubject") ;
 
-        chapter_name = view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name) ;
+       // chapter_name = view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name) ;
         translated_notes = view.findViewById(R.id.frag_start_chapter_second_txtview_notes) ;
         listen = view.findViewById(R.id.frag_start_chapter_second_tglbtn_lisening) ;
         btn_done_save_notes = view.findViewById(R.id.frag_start_chapter_second_button_done) ;
         scanqr = view.findViewById(R.id.frag_start_chapter_second_float_button_qrcode) ;
-        chapter_name.setText(value);
+
         listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,10 +169,22 @@ public class start_chapter_second_page extends Fragment  {
             }
 
         });
-        Toolbar toolbar=view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name);
+        Spinner spinner=view.findViewById(R.id.frag_start_chapter_second_spinner);
+         language=spinner.getSelectedItem().toString();
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+//       Toolbar toolbar=view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name);
+////        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        toolbar.setTitle(value);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp));
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //how to go back write ur code here
+//            }
+//        });
         btn_done_save_notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,10 +223,11 @@ public class start_chapter_second_page extends Fragment  {
 
     public void startspeaking(String str)
     {
+
+
         final FirebaseTranslator englishGermanTranslator =
                 FirebaseNaturalLanguage.getInstance().getTranslator(options);
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
-
                 .build();
         Log.d("checking  model", "after translator code");
 
@@ -285,6 +300,14 @@ public class start_chapter_second_page extends Fragment  {
                                 Log.d("checking  model", e.toString());
                             }
                         });
+
+    }
+
+    public  void selectlanguage(String language)
+    {
+
+
+
 
     }
 }
