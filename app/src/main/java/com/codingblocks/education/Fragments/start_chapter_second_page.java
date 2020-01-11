@@ -4,6 +4,9 @@ package com.codingblocks.education.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -44,6 +47,7 @@ import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOption
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -62,13 +66,11 @@ public class start_chapter_second_page extends Fragment  {
     public static SpeechRecognition speechRecognition  ;
     public static boolean isListening =false;
     public static         String str = "" ;
+    public static  Spinner spinner ;
     public static String TAG = "check" ;
     public static AudioManager audioManager ;
     public static     Thread t ;
-    FirebaseTranslatorOptions options =  new FirebaseTranslatorOptions.Builder()
-            .setSourceLanguage(FirebaseTranslateLanguage.EN)
-            .setTargetLanguage(FirebaseTranslateLanguage.GU)
-            .build();  ;
+    FirebaseTranslatorOptions options; 
     public static  String language ;
 
 
@@ -83,6 +85,7 @@ public class start_chapter_second_page extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_start_chapter_second_page, container, false);
 
         audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,0,0);
         speechRecognition  = new SpeechRecognition(getContext());
         speechRecognition.useGoogleImeRecognition(false,null) ;
         speechRecognition.useOnlyOfflineRecognition(true) ;
@@ -169,8 +172,9 @@ public class start_chapter_second_page extends Fragment  {
             }
 
         });
-        Spinner spinner=view.findViewById(R.id.frag_start_chapter_second_spinner);
+        spinner=view.findViewById(R.id.frag_start_chapter_second_spinner);
          language=spinner.getSelectedItem().toString();
+
 
 
 //       Toolbar toolbar=view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name);
@@ -223,6 +227,49 @@ public class start_chapter_second_page extends Fragment  {
 
     public void startspeaking(String str)
     {
+        language=spinner.getSelectedItem().toString();
+
+        if(language.equals("Hindi"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.HI)
+                    .build();
+        else if(language.equals("Gujrati"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.GU)
+                    .build();
+        else if(language.equals("Marathi"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.MR)
+                    .build();
+        else if(language.equals("English"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.EN)
+                    .build();
+        else if(language.equals("Tamil"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.TA)
+                    .build();
+        else if(language.equals("Telgu"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.TE)
+                    .build();
+        else if(language.equals("Urdu"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.UR)
+                    .build();
+        else if(language.equals("Kanada"))
+            options =  new FirebaseTranslatorOptions.Builder()
+                    .setSourceLanguage(FirebaseTranslateLanguage.EN)
+                    .setTargetLanguage(FirebaseTranslateLanguage.KN)
+                    .build();
+
 
 
         final FirebaseTranslator englishGermanTranslator =
@@ -254,21 +301,57 @@ public class start_chapter_second_page extends Fragment  {
                                                             public void onInit(int status) {
                                                                 // TODO Auto-generated method stub
                                                                 if (status == TextToSpeech.SUCCESS) {
-                                                                    int result = tts.setLanguage(Locale.forLanguageTag("hin"));
+                                                                    int result = tts.setLanguage(Locale.forLanguageTag("hin"))  ;
+
+                                                                    if(language.equals("Hindi"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("hin"));
+
+                                                                    else if(language.equals("Gujrati"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("gu_"));
+
+
+
+                                                                    else if(language.equals("Marathi"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("hin"));
+
+
+                                                                    else if(language.equals("English"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("hin"));
+
+
+                                                                    else if(language.equals("Tamil"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("ta_IN"));
+
+
+                                                                    else if(language.equals("Telgu"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("te_"));
+
+
+                                                                    else if(language.equals("Urdu"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("Ur_IN"));
+
+
+                                                                    else if(language.equals("Kanada"))
+                                                                        result = tts.setLanguage(Locale.forLanguageTag("kn_IN"));
+
+
+
+
                                                                     tts.setSpeechRate((float)0.98) ;
                                                                     if (result == TextToSpeech.LANG_MISSING_DATA ||
                                                                             result == TextToSpeech.LANG_NOT_SUPPORTED) {
                                                                         Log.e("error", "This Language is not supported");
                                                                     } else {
                                                                         String text ;
-                                                                        text = str;
+                                                                        text = translated_notes.getText().toString();
+                                                                        HashMap<String, String> params = new HashMap<>();
                                                                         if(text==null||"".equals(text))
                                                                         {
                                                                             text = "Content not available";
                                                                             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
                                                                         }else
-
-                                                                            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                                                                            params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_ALARM));
+                                                                            tts.speak(text, TextToSpeech.QUEUE_FLUSH, params);
 
 
                                                                     }
