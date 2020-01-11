@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.speech.RecognitionListener;
@@ -20,12 +21,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import android.widget.Toolbar;
 
 import com.codingblocks.education.EntityClasses.Notes;
 import com.codingblocks.education.MainActivity;
 import com.codingblocks.education.R;
+import com.codingblocks.education.Recogination.OnSpeechRecognitionListener;
+import com.codingblocks.education.Recogination.OnSpeechRecognitionPermissionListener;
+import com.codingblocks.education.Recogination.SpeechRecognition;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,8 +48,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class start_chapter_second_page extends Fragment implements
-        RecognitionListener {
+public class start_chapter_second_page extends Fragment  {
 
     TextView chapter_name,translated_notes ;
     ToggleButton listen ;
@@ -53,8 +58,12 @@ public class start_chapter_second_page extends Fragment implements
     ArrayList<String> matches ;
     TextToSpeech tts;
     String translatedinput,scannedinput ;
-    private SpeechRecognizer speech = null;
-    private Intent recognizerIntent;
+    public static SpeechRecognition speechRecognition  ;
+    public static boolean isListening =false;
+    public static         String str = "" ;
+    public static String TAG = "check" ;
+    public static AudioManager audioManager ;
+    public static     Thread t ;
     FirebaseTranslatorOptions options =
             new FirebaseTranslatorOptions.Builder()
                     .setSourceLanguage(FirebaseTranslateLanguage.EN)
@@ -71,13 +80,66 @@ public class start_chapter_second_page extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start_chapter_second_page, container, false);
-        speech = SpeechRecognizer.createSpeechRecognizer(getContext());
-        speech.setRecognitionListener(this);
+        audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+        speechRecognition  = new SpeechRecognition(getContext());
+        speechRecognition.useGoogleImeRecognition(false,null) ;
+        speechRecognition.useOnlyOfflineRecognition(true) ;
+        speechRecognition.setSpeechRecognitionPermissionListener(new OnSpeechRecognitionPermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Log.d("check", "onPermissionGranted: ");
+            }
 
-        recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
+            @Override
+            public void onPermissionDenied() {
+                Log.d(TAG, "onPermissionDenied: ");
+            }
+        });
+        speechRecognition.setSpeechRecognitionListener(new OnSpeechRecognitionListener() {
+            @Override
+            public void OnSpeechRecognitionStarted() {
+                Log.d(TAG, "OnSpeechRecognitionStarted: ");
+            }
+
+            @Override
+            public void OnSpeechRecognitionStopped() {
+                Log.d(TAG, "OnSpeechRecognitionStopped: ");
+
+
+            }
+
+            @Override
+            public void OnSpeechRecognitionFinalResult(String s) {
+                Log.d(TAG, "OnSpeechRecognitionFinalResult: ");
+                str = str+s ;
+                translated_notes.setText(str);
+            t = new Thread(){
+                    @Override
+                    public void run() {
+                        startspeaking(s);
+                    }
+                };
+                t.start();
+               calltoagain(true);
+
+
+            }
+
+            @Override
+            public void OnSpeechRecognitionCurrentResult(String s) {
+                Log.d(TAG, "OnSpeechRecognitionCurrentResult: ");
+
+
+            }
+
+            @Override
+            public void OnSpeechRecognitionError(int i, String s) {
+                calltoagain(true);
+
+            }
+        });
+
+
 
 
         final String value = getArguments().getString("chapterName");
@@ -89,16 +151,26 @@ public class start_chapter_second_page extends Fragment implements
         btn_done_save_notes = view.findViewById(R.id.frag_start_chapter_second_button_done) ;
         scanqr = view.findViewById(R.id.frag_start_chapter_second_float_button_qrcode) ;
         chapter_name.setText(value);
-         listen.setOnClickListener(new View.OnClickListener() {
-             @RequiresApi(api = Build.VERSION_CODES.P)
-             @Override
-             public void onClick(View v) {
-                     Log.d("check",MainActivity.m_amAudioManager.isMicrophoneMute()+"") ;
+        listen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isListening == false) {
+                    speechRecognition.startSpeechRecognition();
+                    listen.setText("Listening");
+                }
+                else
+                {
+                    speechRecognition.stopSpeechRecognition();
+                    t.destroy();
+                    listen.setText("Start Listening");
+                }
+            }
 
-               //  speech.startListening(recognizerIntent);
+        });
+        Toolbar toolbar=view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name);
 
-             }
-         });
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         btn_done_save_notes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,46 +200,15 @@ public class start_chapter_second_page extends Fragment implements
 
         return view ;
     }
-
-    @Override
-    public void onReadyForSpeech(Bundle params) {
-
-    }
-
-    @Override
-    public void onBeginningOfSpeech() {
+    public static void calltoagain(boolean b) {
+        speechRecognition.stopSpeechRecognition();
+        speechRecognition.startSpeechRecognition();
 
     }
 
-    @Override
-    public void onRmsChanged(float rmsdB) {
 
-    }
-
-    @Override
-    public void onBufferReceived(byte[] buffer) {
-
-    }
-
-    @Override
-    public void onEndOfSpeech() {
-        listen.setChecked(false);
-
-    }
-
-    @Override
-    public void onError(int error) {
-        String errorMessage = getErrorText(error);
-
-        listen.setChecked(false);
-    }
-
-    @Override
-    public void onResults(Bundle results) {
-        matches = results
-                .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-
-
+    public void startspeaking(String str)
+    {
         final FirebaseTranslator englishGermanTranslator =
                 FirebaseNaturalLanguage.getInstance().getTranslator(options);
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
@@ -184,7 +225,7 @@ public class start_chapter_second_page extends Fragment implements
                                 Log.d("checking  model", "downloadeddd");
                                 Log.d("checking  model", flag.toString());
 
-                                englishGermanTranslator.translate(matches.get(0))
+                                englishGermanTranslator.translate(str)
                                         .addOnSuccessListener(
                                                 new OnSuccessListener<String>() {
                                                     @Override
@@ -211,7 +252,9 @@ public class start_chapter_second_page extends Fragment implements
                                                                             text = "Content not available";
                                                                             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
                                                                         }else
+
                                                                             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
 
                                                                     }
                                                                 } else
@@ -243,53 +286,5 @@ public class start_chapter_second_page extends Fragment implements
                             }
                         });
 
-
-
-    }
-
-    @Override
-    public void onPartialResults(Bundle partialResults) {
-
-    }
-
-    @Override
-    public void onEvent(int eventType, Bundle params) {
-
-    }
-    public static String getErrorText(int errorCode) {
-        String message;
-        switch (errorCode) {
-            case SpeechRecognizer.ERROR_AUDIO:
-                message = "Audio recording error";
-                break;
-            case SpeechRecognizer.ERROR_CLIENT:
-                message = "Client side error";
-                break;
-            case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                message = "Insufficient permissions";
-                break;
-            case SpeechRecognizer.ERROR_NETWORK:
-                message = "Network error";
-                break;
-            case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-                message = "Network timeout";
-                break;
-            case SpeechRecognizer.ERROR_NO_MATCH:
-                message = "No match";
-                break;
-            case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-                message = "RecognitionService busy";
-                break;
-            case SpeechRecognizer.ERROR_SERVER:
-                message = "error from server";
-                break;
-            case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                message = "No speech input";
-                break;
-            default:
-                message = "Didn't understand, please try again.";
-                break;
-        }
-        return message;
     }
 }

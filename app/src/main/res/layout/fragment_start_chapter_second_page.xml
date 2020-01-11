@@ -3,23 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.start_chapter_second_page">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
-        <TextView
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/frag_start_chapter_second_txtview_chapter_name"
-            android:text="Chapter name"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:layout_marginTop="15dp"
-            android:textStyle="bold"
-            />
+            android:textAlignment="center"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+
+            android:gravity="center"/>
+
+
+
         <ToggleButton
             android:id="@+id/frag_start_chapter_second_tglbtn_lisening"
             android:layout_width="wrap_content"
