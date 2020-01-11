@@ -30,6 +30,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingblocks.education.Fragments.personal_data;
@@ -49,6 +50,7 @@ public class signup extends AppCompatActivity {
     public static ArrayList<String> arrayList=new ArrayList<>();
     Integer REQUEST_CAMERA=1,SELECT_FILE=0;
     Image image;
+    TextView signtologin;
     public  Bitmap mybitmap;
     Uri myuri;
 
@@ -66,12 +68,20 @@ public class signup extends AppCompatActivity {
         repass=findViewById(R.id.sigup_repass);
         language=findViewById(R.id.signup_language);
         mobileno=findViewById(R.id.signup_mobile_number);
+        signtologin=findViewById(R.id.signuptologin);
+
         String pathToPicture;
         final String[] languages={"Hindi","Marathi","Bengali","English","Telugu","Urdu","Kannada","Tamil","Gujrati"};
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this,android.R.layout.select_dialog_item,languages);
         AutoCompleteTextView actv= (AutoCompleteTextView)findViewById(R.id.signup_language);
         actv.setThreshold(1);//will start working from first character
         actv.setAdapter(arrayAdapter);//setting the adapter data into the AutoCompleteTextView
+        signtologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),login.class));
+            }
+        });
 
         signup.setOnClickListener(new View.OnClickListener() {
 

@@ -114,7 +114,7 @@ public class start_chapter_second_page extends Fragment  {
             public void OnSpeechRecognitionFinalResult(String s) {
                 Log.d(TAG, "OnSpeechRecognitionFinalResult: ");
                 str = str+s ;
-                translated_notes.setText(str);
+         //       translated_notes.setText(str);
             t = new Thread(){
                     @Override
                     public void run() {
@@ -148,7 +148,7 @@ public class start_chapter_second_page extends Fragment  {
         final String value1 = getArguments().getString("chapeterSubject") ;
 
        // chapter_name = view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name) ;
-        translated_notes = view.findViewById(R.id.frag_start_chapter_second_txtview_notes) ;
+      //  translated_notes = view.findViewById(R.id.frag_start_chapter_second_txtview_notes) ;
         listen = view.findViewById(R.id.frag_start_chapter_second_tglbtn_lisening) ;
         btn_done_save_notes = view.findViewById(R.id.frag_start_chapter_second_button_done) ;
         scanqr = view.findViewById(R.id.frag_start_chapter_second_float_button_qrcode) ;
@@ -261,7 +261,7 @@ public class start_chapter_second_page extends Fragment  {
                                                                         Log.e("error", "This Language is not supported");
                                                                     } else {
                                                                         String text ;
-                                                                        text = translated_notes.getText().toString();
+                                                                        text = str;
                                                                         if(text==null||"".equals(text))
                                                                         {
                                                                             text = "Content not available";

@@ -127,6 +127,17 @@
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already a memeber? login instead"
+            android:textSize="15sp"
+            android:id="@+id/signuptologin"
+            android:layout_marginBottom="10dp"
+            android:textColor="#ff0000"
+            android:clickable="true"
+            android:layout_gravity="center"/>
+
 
     </LinearLayout>
 

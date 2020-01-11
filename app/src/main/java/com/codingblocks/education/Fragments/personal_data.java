@@ -1,6 +1,8 @@
 package com.codingblocks.education.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.codingblocks.education.R;
+import com.codingblocks.education.login;
 import com.codingblocks.education.signup;
 
 import java.util.ArrayList;
@@ -35,6 +39,7 @@ public class personal_data extends Fragment {
     ArrayList<String> strings= signup.arrayList;
 
     CircleImageView imageView;
+    ImageButton logout;
     TextView user_id,name,designation,email,language,phone,myclass;
 
     @Override
@@ -62,6 +67,35 @@ public class personal_data extends Fragment {
         language=view.findViewById(R.id.frag_personal_data_language);
         phone=view.findViewById(R.id.frag_personal_data_contact);
         imageView=view.findViewById(R.id.frag_personal_data_image);
+        logout=view.findViewById(R.id.frag_personal_data_log_out);
+
+
+logout.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.app_name);
+        builder.setIcon(R.mipmap.ic_launcher);
+        ;
+        builder.setMessage("Do you want to exit?")
+                .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                startActivity(new Intent(getActivity(), login.class));
+            }
+        })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
+
+
+    }
+});
         //
         //
         //
@@ -76,7 +110,7 @@ public class personal_data extends Fragment {
         // imageView.setImageBitmap(bmp);
 
 
-
+user_id.setText("110245");
         name.setText(strings.get(0));
         email.setText(email1);
         designation.setText(designation1);
