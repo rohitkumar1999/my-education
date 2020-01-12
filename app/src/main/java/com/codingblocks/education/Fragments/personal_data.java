@@ -72,24 +72,26 @@ public class personal_data extends Fragment {
 logout.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.app_name);
-        builder.setIcon(R.mipmap.ic_launcher);
-        ;
-        builder.setMessage("Do you want to exit?")
-                .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setTitle(R.string.app_name);
+//        builder.setIcon(R.mipmap.ic_launcher);
+//        ;
+//        builder.setMessage("Do you want to exit?")
+//                .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int id) {
+//
+//                startActivity(new Intent(getActivity(), login.class));
+//            }
+//        })
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+//        AlertDialog alert = builder.create();
+//        alert.show();
 
-                startActivity(new Intent(getActivity(), login.class));
-            }
-        })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+        startActivity(new Intent(getActivity(),signup.class));
 
 
 
@@ -109,15 +111,16 @@ logout.setOnClickListener(new View.OnClickListener() {
         //
         // imageView.setImageBitmap(bmp);
 
+imageView.setImageDrawable(getResources().getDrawable(R.drawable.neeraj));
 
 user_id.setText("110245");
-        name.setText(strings.get(0));
-        email.setText(email1);
-        designation.setText(designation1);
+        name.setText("Neeraj Pandey");
+        email.setText("Neerajkumarp40@gmail.com");
+        designation.setText("Student");
 //
-        language.setText(language1);
-        phone.setText(phone1);
-        myclass.setText(myclass1);
+        language.setText("Hindi");
+        phone.setText("8810439244");
+        myclass.setText("B.tech");
         // Log.d("data", name1);
 //        Log.d("data", designation1);
 //

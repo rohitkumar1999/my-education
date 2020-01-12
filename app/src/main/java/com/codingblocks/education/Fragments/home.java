@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.codingblocks.education.Fragments.personal_data;
 import com.codingblocks.education.Fragments.start_chapter;
@@ -24,12 +25,15 @@ import com.codingblocks.education.Fragments.view_notes;
 import com.codingblocks.education.MainActivity;
 import com.codingblocks.education.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class home extends Fragment implements View.OnClickListener {
 
-
+CircleImageView imageView;
+TextView name,userid;
     public home() {
         // Required empty public constructor
     }
@@ -46,13 +50,18 @@ public class home extends Fragment implements View.OnClickListener {
         View view= inflater.inflate(R.layout.fragment_home, container, false);
 
 
+imageView=view.findViewById(R.id.dash_profile);
+name=view.findViewById(R.id.dash_name);
+userid=view.findViewById(R.id.dash_id);
 
         personal=view.findViewById(R.id.personal_data);
         start_chapter1=view.findViewById(R.id.start_chapter);
         view_notes1=view.findViewById(R.id.view_notes);
 
         translate=view.findViewById(R.id.translate_notes);
-
+imageView.setImageDrawable(getResources().getDrawable(R.drawable.neeraj));
+name.setText("neeraj pandey");
+userid.setText("110245");
 
 
         personal.setOnClickListener(this);

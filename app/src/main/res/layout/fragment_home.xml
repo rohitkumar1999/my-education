@@ -31,23 +31,33 @@
                     android:layout_gravity="center"
                     android:padding="2dp"
 
-                    android:layout_margin="25dp"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="25dp"
                     app:civ_border_width="2dp"
                     android:background="@drawable/circle"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:id="@+id/dash_name"
                     android:layout_toEndOf="@+id/dash_profile"
-                    android:layout_marginTop="35dp"/>
+                    android:layout_marginTop="25dp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="120dp"
                     android:id="@+id/dash_id"
-                    android:layout_below="@+id/dash_name"/>
+                    android:layout_below="@+id/dash_name"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@+id/dash_profile"
+                    />
+
+
+
 
 
 
