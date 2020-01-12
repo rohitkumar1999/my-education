@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingblocks.education.EntityClasses.Chapter;
+import com.codingblocks.education.EntityClasses.Notes;
 import com.codingblocks.education.MainActivity;
 import com.codingblocks.education.R;
 import com.codingblocks.education.expandableadapter;
@@ -84,9 +85,17 @@ import java.util.Map;
                     Log.d("child click", "into child");
                     int i = 0;
                     String s = (String) expandableadapter.getChild(groupPosition, childPosition);
- Fragment fragment=new notes_fragment();
+                    Toast.makeText(getContext(),s,Toast.LENGTH_SHORT).show();
+                    String  notes_scanned = MainActivity.myappdatabaseclass.myDaoforchapter().fetch_scanned_notes(s) ;
+                    Fragment fragment=new notes_fragment();
+                    Bundle b  = new Bundle() ;
+                    b.putString("notes",notes_scanned);
+                    b.putString("chaptername",s);
+                    fragment.setArguments(b);
                     MainActivity.fragmentManager.beginTransaction().replace(R.id.new_container,fragment)
                             .addToBackStack(null).commit() ;
+
+
 
                     return true;
                 }

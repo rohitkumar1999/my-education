@@ -45,7 +45,9 @@ public class qr_fragment extends Fragment {
                     @Override
                     public void run() {
                         scannednotes += result.getText();
-                        Log.d("check", "run: "+scannednotes);
+                        mCodeScanner.releaseResources();
+                        Toast.makeText(getContext(),"Click to scan next",Toast.LENGTH_SHORT).show();
+
                         }
 
 

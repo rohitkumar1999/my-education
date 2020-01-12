@@ -29,6 +29,10 @@ public interface MyDaoforchapter {
     @Query("Select Distinct subject from Notes_Info")
     public List<String> fetch_all_different_subjects() ;
 
+    @Query("SELECT scanned_notes FROM Notes_Info where chapter_name = :arg0")
+    public  String fetch_scanned_notes(String arg0) ;
+
+
 
 
 }

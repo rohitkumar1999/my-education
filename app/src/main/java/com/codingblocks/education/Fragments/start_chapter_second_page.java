@@ -205,7 +205,7 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
                 Log.d("show scanned notes",qr_fragment.scannednotes);
                 notes.setChapter_name(value);
                 notes.setGenerated_notes("Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar");
-                notes.setScanned_notes("Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar");
+                notes.setScanned_notes(qr_fragment.scannednotes);
                 notes.setScanned_test("Who is rohit kumar?,Who is rohit kumar?Who is rohit kumar?Who is rohit kumar?Who is rohit kumar?,Who is rohit kumar?");
                 notes.setSubject(value1);
                 MainActivity.myappdatabaseclass.myDaoforchapter().addNotes(notes);
@@ -221,7 +221,6 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
             @Override
             public void onClick(View v) {
                 MainActivity.fragmentManager.beginTransaction().add(R.id.new_container,new qr_fragment()).addToBackStack(null).commit();
-              //  Log.d("Checking output for ", MainActivity.pref.getString("Scanned_Notes",null));
             }
         });
 

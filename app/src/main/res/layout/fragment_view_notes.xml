@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:groupIndicator="@drawable/group_indicator"
-            android:transcriptMode="alwaysScroll"
+
             android:divider="#A4c739"
             android:id="@+id/expandable_list"
             />
