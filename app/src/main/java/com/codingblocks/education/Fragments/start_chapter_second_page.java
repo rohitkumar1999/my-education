@@ -177,8 +177,6 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
                     listen.setBackgroundResource(R.drawable.ic_play_button);
                     speechRecognition.stopSpeechRecognition();
 
-
-
                 }
                 isListening=!isListening;
             }
@@ -205,6 +203,7 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
             @Override
             public void onClick(View v) {
                 Notes notes = new Notes()  ;
+                Log.d("show scanned notes",qr_fragment.scannednotes);
                 notes.setChapter_name(value);
                 notes.setGenerated_notes("Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar");
                 notes.setScanned_notes("Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar");
@@ -223,7 +222,7 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
             @Override
             public void onClick(View v) {
                 MainActivity.fragmentManager.beginTransaction().add(R.id.new_container,new qr_fragment()).addToBackStack(null).commit();
-
+              //  Log.d("Checking output for ", MainActivity.pref.getString("Scanned_Notes",null));
             }
         });
 
@@ -363,7 +362,7 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
                                                                             text = "Content not available";
                                                                             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
                                                                         }else
-                                                                            params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_ALARM));
+                                                                            params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_VOICE_CALL));
                                                                             tts.speak(text, TextToSpeech.QUEUE_FLUSH, params);
 
 
@@ -399,11 +398,5 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
 
     }
 
-    public  void selectlanguage(String language)
-    {
 
-
-
-
-    }
 }
