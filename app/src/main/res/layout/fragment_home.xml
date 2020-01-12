@@ -85,8 +85,8 @@
                         android:orientation="vertical"
                         >
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="120dp"
+                            android:layout_height="140dp"
                             android:background="@drawable/ic_1306286"
 
 
@@ -122,8 +122,8 @@
                         android:orientation="vertical"
                         >
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="120dp"
+                            android:layout_height="140dp"
                             android:background="@drawable/ic_chapter"
 
 
@@ -164,8 +164,8 @@
                         android:orientation="vertical"
                         >
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="120dp"
+                            android:layout_height="140dp"
                             android:background="@drawable/ic_notes"
 
 
@@ -191,57 +191,21 @@
                     android:layout_rowWeight="1"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="12dp"
-                    android:layout_margin="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="16dp"
-                        android:id="@+id/study_result"
-                        android:orientation="vertical"
-                        >
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@drawable/ic_result"
-
-
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:text="Study result"
-                            android:textColor="#6f6f6f"
-                            android:layout_marginTop="12dp"
-                            />
-
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="12dp"
                     android:layout_margin="12dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+
                         android:id="@+id/translate_notes"
                         android:padding="16dp"
 
                         android:orientation="vertical"
                         >
                         <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="120dp"
+                            android:layout_height="140dp"
                             android:background="@drawable/ic_translate"
 
 
@@ -251,43 +215,6 @@
                             android:layout_height="match_parent"
                             android:textSize="18sp"
                             android:text="Translate Notes"
-                            android:textColor="#6f6f6f"
-                            android:layout_marginTop="12dp"
-                            />
-
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_margin="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:padding="16dp"
-                        android:id="@+id/test"
-                        android:orientation="vertical"
-                        >
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@drawable/ic_test"
-
-
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:text="Test your \nKnowledge"
                             android:textColor="#6f6f6f"
                             android:layout_marginTop="12dp"
                             />

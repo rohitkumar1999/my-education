@@ -11,6 +11,7 @@
         >
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
 
             >
@@ -37,10 +38,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-
+android:layout_marginRight="20dp"
                 android:layout_alignParentRight="true"
                 android:id="@+id/frag_translate_notes_mic"
-                android:background="@drawable/ic_mic_black_24dp"/>
+                android:background="@drawable/ic_speaker"/>
 
         </RelativeLayout>
         <ScrollView

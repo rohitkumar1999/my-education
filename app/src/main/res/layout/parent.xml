@@ -6,7 +6,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/expandable_list_top_heading"
-        android:textSize="25sp"
+        android:textSize="35sp"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="bold"
+        android:textColor="#000"
+android:background="@drawable/view_xml"
 
         android:layout_marginLeft="10dp"/>
 </LinearLayout>

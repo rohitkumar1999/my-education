@@ -47,7 +47,6 @@ public class personal_data extends Fragment {
                              Bundle savedInstanceState) {
         //  assert getArguments() != null;
 
-
         String email1=strings.get(1);
 
         String designation1=strings.get(2);
@@ -80,6 +79,7 @@ logout.setOnClickListener(new View.OnClickListener() {
         builder.setMessage("Do you want to exit?")
                 .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+
                 startActivity(new Intent(getActivity(), login.class));
             }
         })
@@ -127,5 +127,6 @@ user_id.setText("110245");
         //Log.d("data",phone1);
         return view;
     }
+
 
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +21,12 @@ import android.widget.Toast;
 public class login extends AppCompatActivity {
     EditText pass,email;
     AppCompatButton button;
+   public  Boolean signedin=false;
     TextView noaccount;
+    public   void isboolean(Boolean bn)
+    {
+        this.signedin=bn;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,7 @@ public class login extends AppCompatActivity {
                 else  if(email1.equals("neerajpandey@gmail.com")&&pass1.equals("pandey@123")
                         ||email1.equals("rohitkumar@gmail.com")&&pass1.equals("rohit@123")||email1.equals("lovetesh@gmail.com")&&pass1.equals("lovetesh@123"))
                 {
+                   isboolean(true);
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
 
@@ -83,4 +90,15 @@ public class login extends AppCompatActivity {
         }
         return true;
     }
+public  class loggedin extends Application {
+        private boolean signedin=false;
+
+    public boolean isSignedin() {
+        return signedin;
+    }
+
+    public void setSignedin(boolean signedin) {
+        this.signedin = signedin;
+    }
+}
 }

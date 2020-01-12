@@ -50,17 +50,17 @@ public class home extends Fragment implements View.OnClickListener {
         personal=view.findViewById(R.id.personal_data);
         start_chapter1=view.findViewById(R.id.start_chapter);
         view_notes1=view.findViewById(R.id.view_notes);
-        study_result1=view.findViewById(R.id.study_result);
+
         translate=view.findViewById(R.id.translate_notes);
-        test_knowledge=view.findViewById(R.id.test);
+
 
 
         personal.setOnClickListener(this);
         start_chapter1.setOnClickListener(this);
         view_notes1.setOnClickListener(this);
-        study_result1.setOnClickListener(this);
+
         translate.setOnClickListener(this);
-        test_knowledge.setOnClickListener(this);
+
         return  view;
     }
     Fragment fragment = null ;
@@ -79,15 +79,12 @@ public class home extends Fragment implements View.OnClickListener {
             case R.id.view_notes:
                 fragment=new view_notes();
                 break;
-            case R.id.study_result :
-                fragment=new study_result();
-                break;
+
             case R.id.translate_notes :
                 fragment=new translate_notes();
                 break;
-            case R.id.test :
-                fragment=new test_knowledge();
-                break;
+
+
 
 
         }
