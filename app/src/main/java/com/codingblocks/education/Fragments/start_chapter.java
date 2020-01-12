@@ -1,6 +1,7 @@
 package com.codingblocks.education.Fragments;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -62,7 +63,7 @@ public class start_chapter extends Fragment {
                     chapter.setChapter_name(chapterName);
                     chapter.setChapter_subject(subjectName);
                     MainActivity.myappdatabaseclass.myDaoforchapter().addChapter(chapter);
-                    StyleableToast.makeText(getContext(),"Chapter Created Successfully",Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(getActivity(),"Chapter Created Successfully",Toast.LENGTH_SHORT).show();
                     Fragment fragment = new start_chapter_second_page() ;
                     MainActivity.fragmentManager.beginTransaction().replace(R.id.new_container,fragment)
                             .addToBackStack(null).commit() ;
