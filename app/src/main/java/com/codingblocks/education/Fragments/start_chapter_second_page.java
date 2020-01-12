@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -56,7 +57,7 @@ import java.util.Locale;
 public class start_chapter_second_page extends Fragment  {
 
     TextView chapter_name,translated_notes ;
-    ToggleButton listen ;
+    Button listen ;
     Button btn_done_save_notes ;
     FloatingActionButton scanqr ;
     Boolean flag = false ;
@@ -89,6 +90,9 @@ public class start_chapter_second_page extends Fragment  {
         speechRecognition  = new SpeechRecognition(getContext());
         speechRecognition.useGoogleImeRecognition(false,null) ;
         speechRecognition.useOnlyOfflineRecognition(true) ;
+        final String value = getArguments().getString("chapterName");
+        final String value1 = getArguments().getString("chapeterSubject") ;
+
         speechRecognition.setSpeechRecognitionPermissionListener(new OnSpeechRecognitionPermissionListener() {
             @Override
             public void onPermissionGranted() {
@@ -100,6 +104,10 @@ public class start_chapter_second_page extends Fragment  {
                 Log.d(TAG, "onPermissionDenied: ");
             }
         });
+        //Adding Toolbar
+        chapter_name=view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name);
+        chapter_name.setText(value);
+//
         speechRecognition.setSpeechRecognitionListener(new OnSpeechRecognitionListener() {
             @Override
             public void OnSpeechRecognitionStarted() {
@@ -147,28 +155,31 @@ public class start_chapter_second_page extends Fragment  {
 
 
 
-        final String value = getArguments().getString("chapterName");
-        final String value1 = getArguments().getString("chapeterSubject") ;
 
        // chapter_name = view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name) ;
   //    translated_notes = view.findViewById(R.id.frag_start_chapter_second_txtview_notes) ;
         listen = view.findViewById(R.id.frag_start_chapter_second_tglbtn_lisening) ;
         btn_done_save_notes = view.findViewById(R.id.frag_start_chapter_second_button_done) ;
         scanqr = view.findViewById(R.id.frag_start_chapter_second_float_button_qrcode) ;
-
+listen.setBackgroundResource(R.drawable.ic_play_button);
+//scanqr.setImageResource(R.drawable.ic_qr);
         listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isListening == false) {
+                    listen.setBackgroundResource(R.drawable.ic_pause2);
                     speechRecognition.startSpeechRecognition();
-                    listen.setText("Listening");
+
                 }
                 else
                 {
+                    listen.setBackgroundResource(R.drawable.ic_play_button);
                     speechRecognition.stopSpeechRecognition();
-                    t.destroy();
-                    listen.setText("Start Listening");
+
+
+
                 }
+                isListening=!isListening;
             }
 
         });
@@ -201,6 +212,7 @@ public class start_chapter_second_page extends Fragment  {
                 MainActivity.myappdatabaseclass.myDaoforchapter().addNotes(notes);
 
                 MainActivity.fragmentManager.popBackStack();
+
                 MainActivity.fragmentManager.beginTransaction().add(R.id.new_container,new home()).addToBackStack(null).commit();
 
 

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +25,8 @@ import com.muddzdev.styleabletoast.StyleableToast;
  */
 public class start_chapter extends Fragment {
 
-    EditText name_of_chapter,name_of_subject ;
+    EditText name_of_chapter ;
+    AutoCompleteTextView name_of_subject;
     Button  lets_start ;
 
 
@@ -39,6 +42,13 @@ public class start_chapter extends Fragment {
         name_of_chapter = v.findViewById(R.id.frag_start_chapter_txtview_name_of_chapter) ;
         name_of_subject = v.findViewById(R.id.frag_start_chapter_txtview_subject_of_chapter) ;
         lets_start = v.findViewById(R.id.frag_start_chapter_btn_done) ;
+        String subjects[]={"Physics","Chemistry","Mathematics","Computer Science","English","Hindi","Sanskrit",
+                "Geography","History","Accounts","Economics","Sociology","Political Science","Biology","Information practice",
+                "others"};
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(getActivity(),android.R.layout.select_dialog_item,subjects);
+
+        name_of_subject.setThreshold(1);//will start working from first character
+        name_of_subject.setAdapter(arrayAdapter);
         lets_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
