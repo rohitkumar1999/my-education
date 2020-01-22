@@ -1,4 +1,4 @@
-package com.codingblocks.education.Fragments;
+package com.codingblocks.education;
 
 
 import android.graphics.Canvas;
@@ -17,13 +17,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.codingblocks.education.MainActivity;
-import com.codingblocks.education.R;
+import com.codingblocks.education.Fragments.home;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
@@ -38,21 +36,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static com.codingblocks.education.Fragments.start_chapter_second_page.str;
 
-public class notes_fragment extends Fragment {
-
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class speakssspdf extends Fragment {
     ImageButton backButton,listenButton ;
     TextView chapterName,chapterScannedTreanslatedNotes ;
-    public static TextToSpeech  tts ;
+    public static TextToSpeech tts ;
     FirebaseTranslatorOptions options;
 
 
 
 
-    public notes_fragment() {
-
-    }
 
     @Override
     public void onDestroy() {
@@ -64,18 +60,17 @@ public class notes_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes_fragment, container, false);
-        String value = getArguments().getString("notes");
-       // String parsedText = getArguments().getString("text") ;
-        String chap_name = getArguments().getString("chaptername");
+      //  String value = getArguments().getString("notes");
+        String parsedText = getArguments().getString("text") ;
+     //   String chap_name = getArguments().getString("chaptername");
 
         backButton = view.findViewById(R.id.frag_translate_notes_back_arrow);
         listenButton = view.findViewById(R.id.frag_translate_notes_mic);
         chapterName = view.findViewById(R.id.frag_translate_notes_file_name);
         chapterScannedTreanslatedNotes = view.findViewById(R.id.frag_translate_notes_notes);
-        chapterName.setText(chap_name);
-        String clear_notes = value.replaceAll("<Note>?/?", "");
+        chapterName.setText("No name");
+        String clear_notes = parsedText ;
         chapterScannedTreanslatedNotes.setText(clear_notes);
-        createPdf(clear_notes);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +80,6 @@ public class notes_fragment extends Fragment {
             }
         });
         Boolean bn = false;
-
 
         listenButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +95,7 @@ public class notes_fragment extends Fragment {
                 FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
                         .build();
                 Log.d("checking  model", "after translator code");
-                for (int i = 0;i<9; i++) {
+                for (int i = 0; i < 9; i++) {
                     String forrealtts = clear_notes.substring(i, (i + 1) * 100);
                     englishGermanTranslator.downloadModelIfNeeded(conditions)
                             .addOnSuccessListener(
@@ -110,7 +104,7 @@ public class notes_fragment extends Fragment {
                                         public void onSuccess(Void v) {
                                             Log.d("checking  model", "downloadeddd");
 
-                                            englishGermanTranslator.translate(forrealtts)
+                                            englishGermanTranslator.translate(clear_notes)
                                                     .addOnSuccessListener(
                                                             new OnSuccessListener<String>() {
                                                                 @Override
@@ -171,58 +165,13 @@ public class notes_fragment extends Fragment {
 
                 }
             }
-
         });
-
 
         return view;
     }
-    private void createPdf(String sometext){
-        // create a new document
-        PdfDocument document = new PdfDocument();
-        // crate a page description
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-        // start a page
-        PdfDocument.Page page = document.startPage(pageInfo);
-        Canvas canvas = page.getCanvas();
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        canvas.drawCircle(50, 50, 30, paint);
-        paint.setColor(Color.BLACK);
-        canvas.drawText(sometext, 80, 50, paint);
-        //canvas.drawt
-        // finish the page
-        document.finishPage(page);
-// draw text on the graphics object of the page
-        // Create Page 2
-        pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 2).create();
-        page = document.startPage(pageInfo);
-        canvas = page.getCanvas();
-        paint = new Paint();
-        paint.setColor(Color.BLUE);
-        canvas.drawCircle(100, 100, 100, paint);
-        document.finishPage(page);
-        // write the document content
-        String directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        + "/mypdf/";
-        File file = new File(directory_path);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        String targetPdf = directory_path+"test-2.pdf";
-        File filePath = new File(targetPdf);
-        try {
-            document.writeTo(new FileOutputStream(filePath));
-            Toast.makeText(getContext(), "Done", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Log.e("main", "error "+e.toString());
-            Toast.makeText(getContext(), "Something wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
-        }
-        // close the document
-        document.close();
-    }
 
 
-    }
+
+}
 
 

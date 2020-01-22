@@ -47,14 +47,7 @@ public class personal_data extends Fragment {
                              Bundle savedInstanceState) {
         //  assert getArguments() != null;
 
-        String email1=strings.get(1);
 
-        String designation1=strings.get(2);
-        String language1=strings.get(5);
-        String myclass1=strings.get(6);
-
-
-        String phone1=strings.get(4);
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_personal_data, container, false);
 
@@ -124,7 +117,6 @@ user_id.setText("110245");
         // Log.d("data", name1);
 //        Log.d("data", designation1);
 //
-        Log.d("data", email1);
 //        Log.d("data",pass1);
 //        Log.d("data", repass1);
         //Log.d("data",phone1);

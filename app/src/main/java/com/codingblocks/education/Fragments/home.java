@@ -28,6 +28,7 @@ import com.codingblocks.education.Fragments.translate_notes;
 import com.codingblocks.education.Fragments.view_notes;
 import com.codingblocks.education.MainActivity;
 import com.codingblocks.education.R;
+import com.codingblocks.education.speakssspdf;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import com.obsez.android.lib.filechooser.ChooserDialog;
@@ -97,7 +98,7 @@ userid.setText("110245");
                                     for (int i = 0; i <n ; i++) {
                                         parsedText   = parsedText+ PdfTextExtractor.getTextFromPage(reader, i+1).trim()+"\n"; //Extracting the content from the different pages
                                     }
-                                    Fragment fragment = new notes_fragment() ;
+                                    Fragment fragment = new speakssspdf() ;
                                     Bundle b = new Bundle() ;
                                     b.putString("text",parsedText);
                                     fragment.setArguments(b);
