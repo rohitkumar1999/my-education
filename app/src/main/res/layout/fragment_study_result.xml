@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.study_result">
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-</FrameLayout>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart1"
+
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart2"
+            android:layout_marginTop="30dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart3"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart4"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart5"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart6"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="30dp"
+            android:layout_height="300dp" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart7"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="30dp"
+            android:layout_height="300dp" />
+
+
+
+    </LinearLayout>
+</ScrollView>

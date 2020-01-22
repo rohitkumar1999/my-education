@@ -81,7 +81,7 @@ public class expandableadapter extends BaseExpandableListAdapter {
         }
         TextView textView=view.findViewById(R.id.expandable_list_top_heading);
         textView.setTypeface(null, Typeface.BOLD);
-        textView.setText(main_heading);
+        textView.setText(" "+main_heading);
         return view;
     }
 
@@ -95,7 +95,7 @@ public class expandableadapter extends BaseExpandableListAdapter {
 
         }
         TextView textView=view.findViewById(R.id.expandable_list_child_heading);
-        textView.setText(sub_heading);
+        textView.setText(" "+sub_heading);
         return view;
     }
 

@@ -1,6 +1,7 @@
 package com.codingblocks.education.Fragments;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -56,7 +58,7 @@ import java.util.Locale;
 public class start_chapter_second_page extends Fragment  {
 
     TextView chapter_name,translated_notes ;
-    ToggleButton listen ;
+    Button listen ;
     Button btn_done_save_notes ;
     FloatingActionButton scanqr ;
     Boolean flag = false ;
@@ -89,6 +91,9 @@ public class start_chapter_second_page extends Fragment  {
         speechRecognition  = new SpeechRecognition(getContext());
         speechRecognition.useGoogleImeRecognition(false,null) ;
         speechRecognition.useOnlyOfflineRecognition(true) ;
+        final String value = getArguments().getString("chapterName");
+        final String value1 = getArguments().getString("chapeterSubject") ;
+
         speechRecognition.setSpeechRecognitionPermissionListener(new OnSpeechRecognitionPermissionListener() {
             @Override
             public void onPermissionGranted() {
@@ -100,6 +105,10 @@ public class start_chapter_second_page extends Fragment  {
                 Log.d(TAG, "onPermissionDenied: ");
             }
         });
+        //Adding Toolbar
+        chapter_name=view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name);
+        chapter_name.setText(value);
+//
         speechRecognition.setSpeechRecognitionListener(new OnSpeechRecognitionListener() {
             @Override
             public void OnSpeechRecognitionStarted() {
@@ -115,9 +124,9 @@ public class start_chapter_second_page extends Fragment  {
 
             @Override
             public void OnSpeechRecognitionFinalResult(String s) {
-                Log.d(TAG, "OnSpeechRecognitionFinalResult: ");
-                str = str+s ;
-                translated_notes.setText(str);
+
+
+
             t = new Thread(){
                     @Override
                     public void run() {
@@ -147,28 +156,29 @@ public class start_chapter_second_page extends Fragment  {
 
 
 
-        final String value = getArguments().getString("chapterName");
-        final String value1 = getArguments().getString("chapeterSubject") ;
 
        // chapter_name = view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name) ;
-        translated_notes = view.findViewById(R.id.frag_start_chapter_second_txtview_notes) ;
+  //    translated_notes = view.findViewById(R.id.frag_start_chapter_second_txtview_notes) ;
         listen = view.findViewById(R.id.frag_start_chapter_second_tglbtn_lisening) ;
         btn_done_save_notes = view.findViewById(R.id.frag_start_chapter_second_button_done) ;
         scanqr = view.findViewById(R.id.frag_start_chapter_second_float_button_qrcode) ;
-
+listen.setBackgroundResource(R.drawable.ic_play_button);
+//scanqr.setImageResource(R.drawable.ic_qr);
         listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isListening == false) {
+                    listen.setBackgroundResource(R.drawable.ic_pause2);
                     speechRecognition.startSpeechRecognition();
-                    listen.setText("Listening");
+
                 }
                 else
                 {
+                    listen.setBackgroundResource(R.drawable.ic_play_button);
                     speechRecognition.stopSpeechRecognition();
-                    t.destroy();
-                    listen.setText("Start Listening");
+
                 }
+                isListening=!isListening;
             }
 
         });
@@ -193,13 +203,16 @@ public class start_chapter_second_page extends Fragment  {
             @Override
             public void onClick(View v) {
                 Notes notes = new Notes()  ;
+                Log.d("show scanned notes",qr_fragment.scannednotes);
                 notes.setChapter_name(value);
                 notes.setGenerated_notes("Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar,Hello My name is rohit kumar");
-                notes.setScanned_notes("Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar,Hello He is rohit kumar");
+                notes.setScanned_notes(qr_fragment.scannednotes);
                 notes.setScanned_test("Who is rohit kumar?,Who is rohit kumar?Who is rohit kumar?Who is rohit kumar?Who is rohit kumar?,Who is rohit kumar?");
                 notes.setSubject(value1);
                 MainActivity.myappdatabaseclass.myDaoforchapter().addNotes(notes);
+
                 MainActivity.fragmentManager.popBackStack();
+
                 MainActivity.fragmentManager.beginTransaction().add(R.id.new_container,new home()).addToBackStack(null).commit();
 
 
@@ -209,7 +222,6 @@ public class start_chapter_second_page extends Fragment  {
             @Override
             public void onClick(View v) {
                 MainActivity.fragmentManager.beginTransaction().add(R.id.new_container,new qr_fragment()).addToBackStack(null).commit();
-
             }
         });
 
@@ -293,7 +305,6 @@ public class start_chapter_second_page extends Fragment  {
                                                     @Override
                                                     public void onSuccess(@NonNull String translatedText) {
                                                         Log.d("checking  model", translatedText);
-                                                        translated_notes.setText(translatedText);
                                                         translatedinput+=translatedText ;
                                                         tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
 
@@ -343,14 +354,14 @@ public class start_chapter_second_page extends Fragment  {
                                                                         Log.e("error", "This Language is not supported");
                                                                     } else {
                                                                         String text ;
-                                                                        text = translated_notes.getText().toString();
+                                                                        text = translatedText;
                                                                         HashMap<String, String> params = new HashMap<>();
                                                                         if(text==null||"".equals(text))
                                                                         {
                                                                             text = "Content not available";
                                                                             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
                                                                         }else
-                                                                            params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_ALARM));
+                                                                            params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_VOICE_CALL));
                                                                             tts.speak(text, TextToSpeech.QUEUE_FLUSH, params);
 
 
@@ -386,11 +397,5 @@ public class start_chapter_second_page extends Fragment  {
 
     }
 
-    public  void selectlanguage(String language)
-    {
 
-
-
-
-    }
 }
