@@ -14,9 +14,7 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
-/**
- * Created by Maxwell on 15-Jan-18.
- */
+
 
 public class GoogleImeSpeechRecognition extends Fragment {
 

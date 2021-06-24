@@ -57,7 +57,7 @@ import java.util.Locale;
  */
 public class start_chapter_second_page extends Fragment  {
 
-    TextView chapter_name,translated_notes ;
+    TextView chapter_name,translated_notes,currenttext ;
     Button listen ;
     Button btn_done_save_notes ;
     FloatingActionButton scanqr ;
@@ -106,6 +106,7 @@ public class start_chapter_second_page extends Fragment  {
             }
         });
         //Adding Toolbar
+        currenttext = view.findViewById(R.id.current_text) ;
         chapter_name=view.findViewById(R.id.frag_start_chapter_second_txtview_chapter_name);
         chapter_name.setText(value);
 //
@@ -304,6 +305,7 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
                                                 new OnSuccessListener<String>() {
                                                     @Override
                                                     public void onSuccess(@NonNull String translatedText) {
+                                                        currenttext.setText(translatedText);
                                                         Log.d("checking  model", translatedText);
                                                         translatedinput+=translatedText ;
                                                         tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
@@ -327,7 +329,7 @@ listen.setBackgroundResource(R.drawable.ic_play_button);
 
 
                                                                     else if(language.equals("English"))
-                                                                        result = tts.setLanguage(Locale.forLanguageTag("hin"));
+                                                                        result = tts.setLanguage(Locale.ENGLISH);
 
 
                                                                     else if(language.equals("Tamil"))

@@ -30,9 +30,7 @@ public class start_chapter extends Fragment {
     AutoCompleteTextView name_of_subject;
     Button  lets_start ;
 
-
     public start_chapter() {
-        // Required empty public constructor
     }
 
 

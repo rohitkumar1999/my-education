@@ -81,7 +81,7 @@ public class notes_fragment extends Fragment {
             public void onClick(View v) {
                 Fragment fragment = new home();
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.new_container, fragment, null).commit();
-
+                onStop();
             }
         });
         Boolean bn = false;
@@ -101,8 +101,8 @@ public class notes_fragment extends Fragment {
                 FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
                         .build();
                 Log.d("checking  model", "after translator code");
-                for (int i = 0;i<9; i++) {
-                    String forrealtts = clear_notes.substring(i, (i + 1) * 100);
+                for (int i = 0;i<4; ) {
+                    String forrealtts = clear_notes.substring(i, (++i) * 100);
                     englishGermanTranslator.downloadModelIfNeeded(conditions)
                             .addOnSuccessListener(
                                     new OnSuccessListener<Void>() {
@@ -123,7 +123,7 @@ public class notes_fragment extends Fragment {
                                                                             if (status == TextToSpeech.SUCCESS) {
                                                                                 int result = tts.setLanguage(Locale.forLanguageTag("hin"));
 
-                                                                                tts.setSpeechRate((float) 0.98);
+                                                                                tts.setSpeechRate((float) 0.90);
                                                                                 if (result == TextToSpeech.LANG_MISSING_DATA ||
                                                                                         result == TextToSpeech.LANG_NOT_SUPPORTED) {
                                                                                     Log.e("error", "This Language is not supported");
@@ -177,6 +177,15 @@ public class notes_fragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(tts != null){
+            tts.shutdown();
+        }
+    }
+
     private void createPdf(String sometext){
         // create a new document
         PdfDocument document = new PdfDocument();

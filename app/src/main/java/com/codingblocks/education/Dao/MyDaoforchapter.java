@@ -1,5 +1,7 @@
 package com.codingblocks.education.Dao;
 
+import android.widget.Button;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -7,12 +9,11 @@ import androidx.room.Query;
 import com.codingblocks.education.EntityClasses.Chapter;
 import com.codingblocks.education.EntityClasses.Notes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Dao
 public interface MyDaoforchapter {
+
 
     @Insert
     public void addChapter(Chapter chapter) ;

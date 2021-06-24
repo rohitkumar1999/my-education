@@ -6,10 +6,7 @@ package com.codingblocks.education.Recogination;
 
 public interface OnSpeechRecognitionListener {
 
-    /**
-     * This callback is fired once you call {@link SpeechRecognition#startSpeechRecognition()}
-     * to inform you that speech recognition has started listening.
-     */
+
     void OnSpeechRecognitionStarted();
 
     /**

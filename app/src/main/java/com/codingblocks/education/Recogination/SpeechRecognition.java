@@ -18,9 +18,7 @@ import com.codingblocks.education.R;
 
 import static com.codingblocks.education.Fragments.start_chapter_second_page.audioManager;
 
-/**
- * Created by Maxwell on 13-Jan-18.
- */
+
 
 public class SpeechRecognition {
 
